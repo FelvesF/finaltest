@@ -7,15 +7,20 @@ import RegisterScreen from './screens/registerscreen';
 import HomeScreen from './screens/homescreen';
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+
+console.log('App component rendered')
+
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="First">
         <Stack.Screen name="First" component={FirstScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
-  );
-}
+  )
+};
+
+export default App;

@@ -1,27 +1,46 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button, TextInput} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, Text, StyleSheet, Button, TextInput, Alert} from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
-export default function LoginScreen({ navigation }) {
+const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log('User logged in successfully:', user);
+        navigation.navigate('Home');
+      })
+      .catch((error) => {
+        Alert.alert('Error', 'Invalid credentials'); 
+      });
+  };
+
   return (
     <View style={styles.container}>
         <View style={styles.box1}>
       <Text style={styles.text}>Welcome Back!</Text>
       <TextInput
           style={styles.input}
-          placeholder="Username"
+          placeholder="Enter email"
           placeholderTextColor="#000"
+          value={email}
+          onChangeText={setEmail}
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
           placeholderTextColor="#000"
+          value={password}
+          onChangeText={setPassword}
         />
 
       <Button
         title="Log in Now"
-        onPress={() => {
-          navigation.navigate('Home');
-        }}
+        onPress={handleLogin}
       />
       <Button
         title="Don't have an Account?"
@@ -55,7 +74,6 @@ const styles = StyleSheet.create({
     width: 200,
     height: 40,
     marginBottom: 10,
-    
   },
   text: {
     fontSize: 24,
@@ -64,3 +82,5 @@ const styles = StyleSheet.create({
     
   },
 });
+
+export default LoginScreen
