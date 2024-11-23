@@ -2,7 +2,6 @@ import React, {useState, useEffect}from 'react';
 import { View, Text, StyleSheet,TouchableOpacity } from 'react-native';
 import { db } from '../firebaseConfig';
 import { getDoc, doc } from "firebase/firestore";
-import { useNavigation } from "@react-navigation/native";
 
 
 
@@ -41,6 +40,8 @@ export default function HomeScreen({ navigation }) {
       });
   }, []);
 
+
+  
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Homepage Welcome</Text>
