@@ -14,12 +14,12 @@ console.log('App component rendered')
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="First">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="First" component={FirstScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
        <Stack.Screen name="Home" component={HomeScreen} />
-       <Stack.Screen name="About" component={AboutScreen} />
+       <Stack.Screen name="About" component={AboutScreen} options={{ title: 'Drink Counter' , headerStyle: { backgroundColor: "#012124" }, headerTintColor: "#ffffff" }} />
       
       </Stack.Navigator>
     </NavigationContainer>
