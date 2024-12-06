@@ -1,8 +1,9 @@
 import React, {useState, useEffect}from 'react';
-import { View, Text, StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet,TouchableOpacity, Button } from 'react-native';
 import { db } from '../firebaseConfig';
 import { getDoc, doc } from "firebase/firestore";
-
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebaseConfig'; 
 
 
 const styles = StyleSheet.create({
@@ -19,7 +20,22 @@ const styles = StyleSheet.create({
 });
 
 
+
+
 export default function HomeScreen({ navigation }) {
+
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log('User logged out successfully');
+      // Redirect to login screen after logout
+      // Use navigation or any method to go back to the login page
+      navigation.replace('Login'); // Assuming you're using React Navigation
+    } catch (error) {
+      console.error('Error logging out:', error.message);
+    }
+  };
 
   
   const [name, setName] = useState('');
@@ -49,6 +65,7 @@ export default function HomeScreen({ navigation }) {
 <TouchableOpacity onPress={() => navigation.navigate('About')}>
   <Text>About Us</Text>
 </TouchableOpacity>
+<Button title="Logout" onPress={handleLogout} />
     </View>
 
   );
